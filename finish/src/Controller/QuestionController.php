@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Question;
 use App\Service\MarkdownHelper;
+use Doctrine\ORM\EntityManagerInterface;
+use Laminas\Code\Reflection\FunctionReflection;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +39,26 @@ class QuestionController extends AbstractController
         return $this->render('question/homepage.html.twig');
     }
 
+    /**
+     * @Route("/questions/new")
+     */
+    public Function new(EntityManagerInterface $entitymanager){
+        $question = new Question();
+        $question->setName('Missing pen')
+            ->setSlug('missing-pen'.rand(0,1000))
+            ->setQuestion(
+            'afkjawjraskviaerkffdwlfki');
+            if(rand(1,10)>2) {
+                $question->setAsketAt(new \DateTime(sprintf('-%d days',rand(1,100))));
+            }
+            $entitymanager->persist($question);
+            $entitymanager->flush();
+
+            return new Response(sprintf('well id #%d,slug %s',
+                $question->getId(),
+                $question->getSlug(),
+        ));
+    }
     /**
      * @Route("/questions/{slug}", name="app_question_show")
      */
