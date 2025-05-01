@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Query\QueryBuilder as QueryQueryBuilder;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -50,19 +52,23 @@ class QuestionRepository extends ServiceEntityRepository
     // /**
     //  * @return Question[] Returns an array of Question objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findAllAskedOrderedByNewest()
     {
-        return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('q.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->addIsAskedQueryBuilder()
+            ->orderBy('q.askedAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
+    private function addIsAskedQueryBuilder(QueryBuilder $qb = null):QueryBuilder{
+        return $this->getOrCreateQueryBuilder($qb)  
+             ->andWhere('q.askedAt is not null');
+    }
+    private function getOrCreateQueryBuilder(QueryBuilder $qb = null):QueryBuilder{
+        return $qb?:$this->createQueryBuilder('q');
+    }
 
     /*
     public function findOneBySomeField($value): ?Question
