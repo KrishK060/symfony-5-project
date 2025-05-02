@@ -25,6 +25,9 @@
                                 <a class="vote-up" href="#"><i class="far fa-arrow-alt-circle-up"></i></a>
                                 <a class="vote-down" href="#"><i class="far fa-arrow-alt-circle-down"></i></a>
                             </div>
+                            <div class="vote-arrows vote-arrows-alt flex-fill pt-2" style="min-width: 90px;">
+                                <span>{{ question.VotesString}} votes</span>
+                            </div>
                         </div>
                         <div class="col">
                             <a class="q-title" href="{{ path('app_question_show', { slug: question.slug }) }}"><h2>{{ question.name }}</h2></a>

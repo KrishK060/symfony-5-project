@@ -44,7 +44,7 @@ class Question
 
     public function getId(): ?int
     {
-        return $this->id; 
+        return $this->id;
     }
 
     public function getName(): ?string
@@ -83,12 +83,12 @@ class Question
         return $this;
     }
 
-    public function getAsketAt(): ?\DateTimeInterface
+    public function getAskedAt(): ?\DateTimeInterface
     {
         return $this->askedAt;
     }
 
-    public function setAsketAt(?\DateTimeInterface $askedAt): self
+    public function setAskedAt(?\DateTimeInterface $askedAt): self
     {
         $this->askedAt = $askedAt;
 
@@ -100,6 +100,11 @@ class Question
         return $this->votes;
     }
 
+    public function getVotesString(): string
+    {
+        $prefix = $this->getVotes() >= 0 ? '+' : '-';
+        return sprintf('%s %d', $prefix, abs($this->getVotes()));
+    }
     public function setVotes(int $votes): self
     {
         $this->votes = $votes;

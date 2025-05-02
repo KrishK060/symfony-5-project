@@ -11,7 +11,17 @@
                 <div class="q-container-show p-4">
                     <div class="row">
                         <div class="col-2 text-center">
-                            <img src="{{ asset('images/tisha.png') }}" width="100" height="100"  alt="Tisha avatar">
+                            <img src="{{ asset('images/tisha.png') }}" width="100" height="100" alt="Tisha avatar">
+                            <form action="{{ path('app_question_vote',{slug: question.slug}) }}" method ="POST">
+                                <div class="d-block mt-3 vote-arrows">
+                                    <button class="vote-up" name="direction" value="up" href="#"><i class="far fa-arrow-alt-circle-up"></i></a>
+                                    <button class="vote-down" name="direction" value="down" href="#"><i class="far fa-arrow-alt-circle-down"></i></a>
+                                </div>
+                                <div class="vote-arrows vote-arrows-alt flex-fill pt-2" style="min-width: 90px;">
+                                    <span>{{ question.VotesString}} votes</span>
+                                </div>
+                            </form>
+
                         </div>
                         <div class="col">
                             <h1 class="q-title-show">{{ question.name }}</h1>
@@ -21,6 +31,7 @@
                                 <p class="pt-4"><strong>--Tisha</strong></p>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -36,22 +47,24 @@
 
     <ul class="list-unstyled">
         {% for answer in answers %}
-            <li class="mb-4">
-                <div class="d-flex justify-content-center">
-                    <div class="mr-2 pt-2">
-                        <img src="{{ asset('images/tisha.png') }}" width="50" height="50" alt="Tisha avatar">
-                    </div>
-                    <div class="mr-3 pt-2">
-                        {{ answer|parse_markdown }}
-                        <p>-- Mallory</p>
-                    </div>
-                    <div class="vote-arrows flex-fill pt-2 js-vote-arrows" style="min-width: 90px;">
-                        <a class="vote-up" href="#" data-direction="up"><i class="far fa-arrow-alt-circle-up"></i></a>
-                        <a class="vote-down" href="#" data-direction="down"><i class="far fa-arrow-alt-circle-down"></i></a>
-                        <span>+ <span class="js-vote-total">6</span></span>
-                    </div>
+        <li class="mb-4">
+            <div class="d-flex justify-content-center">
+                <div class="mr-2 pt-2">
+                    <img src="{{ asset('images/tisha.png') }}" width="50" height="50" alt="Tisha avatar">
                 </div>
-            </li>
+                <div class="mr-3 pt-2">
+                    {{ answer|parse_markdown }}
+                    <p>-- Mallory</p>
+                </div>
+                <div class="vote-arrows flex-fill pt-2 js-vote-arrows" style="min-width: 90px;">
+                    <a class="vote-up" href="#" data-direction="up"><i class="far fa-arrow-alt-circle-up"></i></a>
+                    <a class="vote-down" href="#" data-direction="down"><i class="far fa-arrow-alt-circle-down"></i></a>
+                </div>
+                <div class="vote-arrows vote-arrows-alt flex-fill pt-2" style="min-width: 90px;">
+                    <span>{{ question.votes}} votes</span>
+                </div>
+            </div>
+        </li>
         {% endfor %}
     </ul>
 </div>

@@ -8,6 +8,7 @@
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/annotations": "^1.13",
         "doctrine/doctrine-bundle": "^2.3",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.20",
         "knplabs/knp-markdown-bundle": "^1.8",
@@ -32,7 +33,8 @@
         "symfony/debug-bundle": "5.3.*",
         "symfony/maker-bundle": "^1.15",
         "symfony/var-dumper": "5.3.*",
-        "symfony/web-profiler-bundle": "5.3.*"
+        "symfony/web-profiler-bundle": "5.3.*",
+        "zenstruck/foundry": "^1.23"
     },
     "config": {
         "preferred-install": {
