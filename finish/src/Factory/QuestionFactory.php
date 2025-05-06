@@ -52,6 +52,8 @@ final class QuestionFactory extends ModelFactory
                     true
                 ),
                 'asked_at' => self::faker()->boolean(70) ? self::faker()->dateTimeBetween('-100 days', '-1 day') : null,
+               'createdAt' => new \DateTime(),
+                'updatedAt' => new \DateTime(),
                 'votes' => rand(-20, 30),
             
         ];

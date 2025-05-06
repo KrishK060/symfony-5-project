@@ -26,6 +26,8 @@ class AppFixtures extends Fixture
         $question->setName('how to disappear');
         $question->setQuestion('i sould not have this');
 
+        $answer->setQuestion($question);
+
         $manager->persist($answer);
         $manager->persist($question);
         $manager->flush();
