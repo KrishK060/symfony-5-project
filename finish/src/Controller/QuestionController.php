@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Answer;
 use App\Entity\Question;
+use App\Repository\AnswerRepository;
 use App\Repository\QuestionRepository;
 use App\Service\MarkdownHelper;
 use Doctrine\ORM\EntityManager;
@@ -71,16 +73,21 @@ class QuestionController extends AbstractController
         return new Response('sounds like a great');
     }
     /**
-     * @Route("/questions/{slug}", name="app_question_show")
-     */
-    public function show(Question $question)
+ * @Route("/questions/{slug}", name="app_question_show")
+ */
+public function show(Question $question)
+
     {
         $answers = [
             'Make sure your cat is sitting `purrrfectly` still 🤣',
             'Honestly, I like furry shoes better than MY cat',
             'Maybe... try saying the spell backwards?',
         ];
+        $answers = $question->getAnswers();
+        foreach($answers as $answer){
+            dump($answer);
 
+        }
         return $this->render('question/show.html.twig', [
             'question' => $question,
             'answers' => $answers,

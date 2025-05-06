@@ -38,24 +38,24 @@ final class QuestionFactory extends ModelFactory
         // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
     }
 
-    public function unpublished(){
-        return $this->addState(['askedAt'=>null]);
+    public function unpublished()
+    {
+        return $this->addState(['askedAt' => null]);
     }
     protected function getDefaults(): array
     {
         return [
-            
-                'name' => self::faker()->realText(50),
-                'slug' => self::faker()->slug(),
-                'question' => self::faker()->paragraph(
-                    self::faker()->numberBetween(1,4),
-                    true
-                ),
-                'asked_at' => self::faker()->boolean(70) ? self::faker()->dateTimeBetween('-100 days', '-1 day') : null,
-               'createdAt' => new \DateTime(),
-                'updatedAt' => new \DateTime(),
-                'votes' => rand(-20, 30),
-            
+
+            'name' => self::faker()->realText(50),
+            'slug' => self::faker()->slug(),
+            'question' => self::faker()->paragraph(
+                self::faker()->numberBetween(1, 4),
+                true
+            ),
+            'asked_at' => self::faker()->boolean(70) ? self::faker()->dateTimeBetween('-100 days', '-1 day') : null,
+            'votes' => rand(-20, 30),
+            'createdAt' => self::faker()->dateTime(),
+            'updatedAt' => self::faker()->dateTime(),
         ];
     }
 
@@ -63,13 +63,12 @@ final class QuestionFactory extends ModelFactory
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
-            ->afterInstantiate(function(Question $question): void {
-                if(!$question->getSlug()){
+            ->afterInstantiate(function (Question $question): void {
+                if (!$question->getSlug()) {
                     $slugger = new AsciiSlugger();
                     $question->setSlug($slugger->slug($question->getName()));
                 }
-            })
-        ;
+            });
     }
 
     protected static function getClass(): string
