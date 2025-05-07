@@ -51,6 +51,7 @@ class Question
 
     /**
      * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="question")
+     * @ORM\OrderBy({"createdAt"="DESC"})
      */
     private $answers;
 
@@ -135,6 +136,12 @@ class Question
     public function getAnswers(): Collection
     {
         return $this->answers;
+    }
+
+    public function getApprovedAnswers():Collection{
+        return $this->answers->filter(function(Answer $answer){
+            return $answer->isApproved();
+        });
     }
 
     public function addAnswer(Answer $answer): self
