@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Factory\AnswerFactory;
+use App\Repository\AnswerRepository;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -139,9 +141,10 @@ class Question
     }
 
     public function getApprovedAnswers():Collection{
-        return $this->answers->filter(function(Answer $answer){
-            return $answer->isApproved();
-        });
+        // return $this->answers->filter(function(Answer $answer){
+        //     return $answer->isApproved();
+        // });
+        return $this->answers->matching(AnswerRepository::createApprovedCriteria());
     }
 
     public function addAnswer(Answer $answer): self
