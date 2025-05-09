@@ -20,7 +20,7 @@
                 <div class="q-container p-4">
                     <div class="row">
                         <div class="col-2 text-center">
-                            <img src="{{ asset('images/tisha.png') }}" width="100" height="100"  alt="Tisha avatar">
+                            <img src="{{ asset('images/tisha.png') }}" width="100" height="100" alt="Tisha avatar">
                             <div class="d-block mt-3 vote-arrows">
                                 <a class="vote-up" href="#"><i class="far fa-arrow-alt-circle-up"></i></a>
                                 <a class="vote-down" href="#"><i class="far fa-arrow-alt-circle-down"></i></a>
@@ -28,12 +28,11 @@
                             <div class="vote-arrows vote-arrows-alt flex-fill pt-2" style="min-width: 90px;">
                                 <span>{{ question.VotesString}} votes</span>
                             </div>
-                            {% for tag in question.tags %}
-                                <span class="badge rounded-pill bg-light text-dark">{{tag.name}}</span>
-                            {% endfor %}
                         </div>
                         <div class="col">
-                            <a class="q-title" href="{{ path('app_question_show', { slug: question.slug }) }}"><h2>{{ question.name }}</h2></a>
+                            <a class="q-title" href="{{ path('app_question_show', { slug: question.slug }) }}">
+                                <h2>{{ question.name }}</h2>
+                            </a>
                             <div class="q-display p-3">
                                 <i class="fa fa-quote-left mr-3"></i>
                                 <p class="d-inline">{{question.question|parse_markdown}}</p>
@@ -42,7 +41,8 @@
                         </div>
                     </div>
                 </div>
-                <a class="answer-link" href="{{ path('app_question_show', { slug: question.slug }) }}" style="color: #fff;">
+                <a class="answer-link" href="{{ path('app_question_show', { slug: question.slug }) }}"
+                    style="color: #fff;">
                     <p class="q-display-response text-center p-3">
                         <i class="fa fa-magic magic-wand"></i>{{question.approvedAnswers|length}}
                     </p>
@@ -53,4 +53,3 @@
     </div>
 </div>
 {% endblock %}
-
