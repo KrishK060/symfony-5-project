@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TagRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,9 @@ class Tag
      */
     private $name;
 
+
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,4 +43,5 @@ class Tag
 
         return $this;
     }
+
 }
