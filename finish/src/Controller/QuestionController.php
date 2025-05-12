@@ -10,6 +10,9 @@ use App\Service\MarkdownHelper;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Laminas\Code\Reflection\FunctionReflection;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+
+use Pagerfanta\Pagerfanta;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,9 +33,9 @@ class QuestionController extends AbstractController
 
 
     /**
-     * @Route("/", name="app_homepage")
+     * @Route("/{page<\d+>}", name="app_homepage")
      */
-    public function homepage(QuestionRepository $repositery)
+    public function homepage(QuestionRepository $repositery,int $page = 1)
     {
         /*
         // fun example of using the Twig service directly!
@@ -41,9 +44,17 @@ class QuestionController extends AbstractController
         return new Response($html);
         */
         // $repositery = $entitymanager->getRepository(Question::class);
-        $questions = $repositery->findAllAskedOrderedByNewest();
+        $queryBuilder = $repositery->createAskedOrderedByNewestQueryBuilder();
+
+        $pagerfanta = new Pagerfanta(
+            new QueryAdapter($queryBuilder)
+        );
+
+        $pagerfanta->setMaxPerPage(5);
+        $pagerfanta->setCurrentPage($page);
+
         return $this->render('question/homepage.html.twig', [
-            'questions' => $questions,
+            'pager' => $pagerfanta,
         ]);
     }
 

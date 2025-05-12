@@ -1,4 +1,7 @@
 {
+    "babdev/pagerfanta-bundle": {
+        "version": "v3.6.1"
+    },
     "clue/stream-filter": {
         "version": "v1.4.1"
     },
