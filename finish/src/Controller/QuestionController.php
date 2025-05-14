@@ -63,6 +63,7 @@ class QuestionController extends AbstractController
      */
     public function new(EntityManagerInterface $entitymanager)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         // $question = new Question();
         // $question->setName('Missing pant')
         //     ->setSlug('missing-pen' . rand(0, 1000))

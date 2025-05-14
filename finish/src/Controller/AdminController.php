@@ -53,5 +53,21 @@ class AdminController extends AbstractController
             'chart' => $chart,
             'chart2' => $chart2,
         ]);
+
+    
     }
+     /**
+     * @Route("/admin/login", name="admin_dashboard")
+     */
+    public function adminLogin(){
+     return new Response('you are login as admin');       
+    }
+
+     /**
+     * @Route("/admin/answers")
+     */
+    public function adminAnswers(){
+        $this->denyAccessUnlessGranted('ROLE_COMMET_ADMIN');
+        return new Response('pretend admin ans page');       
+       }
 }
