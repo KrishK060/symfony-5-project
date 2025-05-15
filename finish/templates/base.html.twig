@@ -13,7 +13,15 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-light bg-light" style="height: 100px;">
+  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+      {{ stimulus_controller('user-api',{
+        url: path('app_user_api_me')
+      }) }}
+  {% endif %}
+  <nav 
+  class="navbar navbar-light bg-light" style="height: 100px;"
+  {{is_granted('ROLE_PREVIOUS_ADMIN') ? 'style="background-color: red !important"' }}
+  >
     <a class="navbar-brand" href="{{ path('app_homepage') }}">
       <i style="color: #444; font-size: 2rem;" class="pb-1 fad fa-cauldron"></i>
       <p class="pl-2 d-inline font-weight-bold" style="color: #444;">Cauldron Overflow</p>
@@ -40,7 +48,16 @@
         aria-expanded="false">
         <img src="{{ app.user.avatarUri }}" alt="{{ app.user.firstName }} Avatar">
       </button>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-dropdown">
+     
+        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+        <li>
+          <a href="{{ path('app_homepage',{
+            '_switch_user': '_exit'
+          }) }}">
+            <button class="btn btn-dark">exit impersonate</button>
+          </a>
+        </li>
+        {% endif %}
         <a href="{{ path('app_logout') }}">
           <button class="btn btn-dark">Logout</button>
         </a>
@@ -48,8 +65,10 @@
         <a href="{{ path('app_login') }}">
           <button class="btn btn-dark">Login</button>
         </a>
-
-        <button class="btn btn-dark">Sign up</button>
+        
+        <a href="{{ path('app_register') }}">
+          <button class="btn btn-dark">SignIn</button>
+        </a>
         {% endif %}
 
   </nav>
