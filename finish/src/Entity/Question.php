@@ -62,6 +62,12 @@ class Question
      */
     private $questiontags;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="questions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
    
 
     public function __construct()
@@ -203,6 +209,18 @@ class Question
                 $questiontag->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

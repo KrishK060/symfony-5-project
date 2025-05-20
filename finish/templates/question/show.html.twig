@@ -11,7 +11,8 @@
                 <div class="q-container-show p-4">
                     <div class="row">
                         <div class="col-2 text-center">
-                            <img src="{{ asset('images/tisha.png') }}" width="100" height="100" alt="Tisha avatar">
+                            <img src="{{ question.owner.avatarUri }}" width="100" height="100"
+                                alt="{{ question.owner.displayName }}avatar">
                             <form action="{{ path('app_question_vote',{slug: question.slug}) }}" method="POST">
                                 <div class="d-block mt-3 vote-arrows">
                                     <button class="vote-up" name="direction" value="up" href="#"><i
@@ -26,11 +27,16 @@
 
                         </div>
                         <div class="col">
-                            <h1 class="q-title-show">{{ question.name }}</h1>
+                            <div class="d-flex justify-content-between">
+                                <h1 class="q-title-show">{{ question.name }}</h1>
+                                <a href="{{ path('app_question_edit',{
+                                    slug: question.slug
+                                }) }}" class="btn btn-secondary btn-sm mb-2 ">Edit</a>
+                            </div>
                             <div class="q-display p-3">
                                 <i class="fa fa-quote-left mr-3"></i>
                                 <p class="d-inline">{{ question.question|parse_markdown }}</p>
-                                <p class="pt-4"><strong>--Tisha</strong></p>
+                                <p class="pt-4"><strong>--{{ question.owner.displayName }}</strong></p>
                             </div>
                         </div>
 

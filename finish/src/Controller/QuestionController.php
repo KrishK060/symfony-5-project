@@ -105,6 +105,21 @@ public function show(Question $question)
             'answers' => $answers,
         ]);
     }
+    /**
+ * @Route("/questions/edit/{slug}", name="app_question_edit")
+ */
+public function edit(Question $question)
+
+{
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+    
+    if($question->getOwner() !== $this->getUser()){
+        throw $this->createAccessDeniedException('you are not the owner of this question');
+    }
+    return $this->render('question/edit.html.twig', [
+        'question' => $question,
+    ]);
+}
 
     /**
      * @Route("/questions/{slug}/vote", name="app_question_vote", methods="POST")

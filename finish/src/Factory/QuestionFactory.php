@@ -56,6 +56,7 @@ final class QuestionFactory extends ModelFactory
             'votes' => rand(-20, 30),
             'createdAt' => self::faker()->dateTime(),
             'updatedAt' => self::faker()->dateTime(),
+            'owner' => UserFactory::new(),
         ];
     }
 
