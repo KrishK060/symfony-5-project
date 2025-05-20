@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Verify Email{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="login-form bg-light mt-4 p-4">
+            <h1 class="h3 mb-3 font-weight-normal">use the below qr to do google authenticate yourself</h1>
+            <img src="{{path('app_qr_code')}}" alt="2fa qr code">
+        </div>
+    </div>
+</div>
+{% endblock %}

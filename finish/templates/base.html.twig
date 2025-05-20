@@ -58,6 +58,9 @@
           </a>
         </li>
         {% endif %}
+        <a href="{{ path('app_2fa_enable') }}">
+          <button class="btn btn-dark">Enable 2fa</button>
+        </a>
         <a href="{{ path('app_logout') }}">
           <button class="btn btn-dark">Logout</button>
         </a>
@@ -88,6 +91,7 @@
   </footer>
   {% block javascripts %}
   {{ encore_entry_script_tags('app') }}
+
   {% endblock %}
 </body>
 
